@@ -34,7 +34,7 @@ Then, in my `source/js/firehose/app.js.coffee file:
     
 ### Staying up-to-date
 
-Periodically, it's a good idea to keep your submodules up to date. You would do this by:
+Periodically, it's a good idea to keep your shared submodule up to date. You would do this by:
 
     cd source/js/[application]/shared
     git stash
