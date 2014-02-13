@@ -6,7 +6,7 @@ Shared components among Firehose client ember apps
 
 ### Usage
 
-This is not meant to be cloned down as an independent repo. It is inteded to be included in ember projects as a submodule.
+**NOTE**: This is not meant to be cloned down as an independent repo. It is inteded to be included in ember projects as a submodule.
 
 I suggest adding it as a submodule in
 
