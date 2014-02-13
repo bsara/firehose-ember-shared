@@ -31,3 +31,24 @@ Then, in my `source/js/firehose/app.js.coffee file:
     #= require_tree ./templates
     #= require_tree ./routes
     #= require ./router
+    
+### Staying up-to-date
+
+Periodically, it's a good idea to keep your submodules up to date. You would do this by:
+
+    cd source/js/[application]/shared
+    git stash
+    git pull -r origin master
+    git stash apply
+
+### Contributing
+
+And then, of course, if you make any changes to anything in the shared submodule, you would:
+
+    cd source/js/[application]/shared
+    git add . -A
+    git commit -am 'I did blah blah blah.'
+    git pull -r origin master
+    git push origin master
+
+to update the shared repo.
