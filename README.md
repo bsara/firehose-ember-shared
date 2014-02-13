@@ -40,6 +40,8 @@ Periodically, it's a good idea to keep your shared submodule up to date. You wou
     git stash
     git pull -r origin master
     git stash apply
+    
+[Stash?](http://ndpsoftware.com/git-cheatsheet.html)
 
 ### Contributing
 
