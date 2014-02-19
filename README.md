@@ -60,6 +60,8 @@ Periodically, it's a good idea to keep your shared submodule up to date. You wou
 
 ### Contributing
 
+Currently, it symlinks absolute paths. This is not ideal, it'd be much better to symlink based on relative paths. I tried for an hour to make it work and gave up. If you'd like to help with that…
+
 And then, of course, if you make any changes to anything in the shared submodule, you would:
 
     cd source/js/[application]/shared
