@@ -4,44 +4,59 @@ firehose-ember-shared
 Shared components among Firehose client ember apps
 
 
-### Usage
+### Install
 
 **NOTE**: This is not meant to be cloned down as an independent repo. It is inteded to be included in ember projects as a submodule.
 
-I suggest adding it as a submodule in
+Add this as a submodule in your root project directory:
 
-    source/js/[application]/shared
+    $ git submodule add https://github.com/mysterioustrousers/firehose-ember-shared.git shared
+
+Then, run the following script to create symlinks in your project to shared files.
+
+    $ cd shared && ./install
     
-So, in the browser app, I'm going to add it like (assuming I'm in the root of the browser project):
+The shared repo directory structure is a subset mirror of your project, start with the "source" directory. So, your project **MUST** follow the following project structure:
 
-    $ git submodule add https://github.com/mysterioustrousers/firehose-ember-shared.git source/assets/js/firehose/shared
+    +-shared/
+      |
+      +-source/
+        |
+        +-assets/
+          |
+          +-css/
+          | |
+          | +-app/
+          | | |
+          | | +-components/
+          | |
+          | +-vendor/
+          |
+          +-js/
+            |
+            +-app/
+            | |
+            | +-components/
+            | |
+            | +-templates/
+            | | |
+            | | +-components/
+            | |
+            | +-views/
+            |
+            +-vendor/
+            
+Obviously, an ember app is going to have a lot more than just that, but that's the min. that needs to be present. Otherwise `/.install` is going to create these directories and symlink the files to the wrong locations.
 
-Then, in my `source/js/firehose/app.js.coffee file:
-
-    #= require_self
-    #= require_tree ./misc
-    #= require_tree ./mixins
-    #= require ember-view-animate
-    #= require_tree ./view_models
-    #= require_tree ./controllers
-    #= require_tree ./views
-    #= require_tree ./helpers
-    #= require_tree ./components
-    #= require_tree ./shared        <= I would add this line so all shared componetns will be included when ember loads.
-    #= require_tree ./templates
-    #= require_tree ./routes
-    #= require ./router
     
 ### Staying up-to-date
 
 Periodically, it's a good idea to keep your shared submodule up to date. You would do this by:
 
-    cd source/js/[application]/shared
-    git stash
-    git pull -r origin master
-    git stash apply
+    $ cd shared
+    $ git pull -r origin master
+    $ ./install
     
-[Stash?](http://ndpsoftware.com/git-cheatsheet.html)
 
 ### Contributing
 
