@@ -4,7 +4,7 @@ echo "\n**********************"
 echo "START FIREHOSE SERVERS"
 echo "**********************\n"
 
-if [ ! -e "$HOME/.bash_profile" ] ; then
+if [ -e "$HOME/.bash_profile" ] ; then
   source $HOME/.bash_profile
 fi
 
