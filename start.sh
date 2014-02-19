@@ -42,32 +42,32 @@ echo $FH_API_DIR
 
 if [ FH_API_DIR ] && [ -e $FH_API_DIR ] ; then
   echo "-> Starting API rails server"
-  cd $FH_API_DIR && rails s &
+  cd $FH_API_DIR && bundle exec rails s &
 fi
 
 if [ FH_BROWSER_DIR ] && [ -e $FH_API_DIR ] ; then
-  echo "-> starting browser middleman server"
-  cd $FH_BROWSER_DIR && middleman -p 4001 &
+  echo "-> starting browser middleman server (http://localhost:4001)"
+  cd $FH_BROWSER_DIR && bundle exec middleman -p 4001 &
 fi
 
 if [ FH_BILLING_DIR ] && [ -e $FH_BILLING_DIR ] ; then
   echo "-> Starting billing rails server"
-  cd $FH_BILLING_DIR && rails s -p 3002 &
+  cd $FH_BILLING_DIR && bundle exec rails s -p 3002 &
 fi
 
 if [ FH_TINY_URL_DIR ] && [ -e $FH_TINY_URL_DIR ] ; then
   echo "-> Starting tinyurl rails server"
-  cd $FH_TINY_URL_DIR && rails s -p 3003 &
+  cd $FH_TINY_URL_DIR && bundle exec rails s -p 3003 &
 fi
 
 if [ FH_MARKETING_DIR ] && [ -e $FH_MARKETING_DIR ] ; then
-  echo "-> Starting marketing middleman server"
-  cd $FH_MARKETING_DIR && middleman -p 4004 &
+  echo "-> Starting marketing middleman server (http://localhost:4004)"
+  cd $FH_MARKETING_DIR && bundle exec middleman -p 4004 &
 fi
 
 if [ FH_SETTINGS_DIR ] && [ -e $FH_SETTINGS_DIR ] ; then
-  echo "-> Starting settings middleman server"
-  cd $FH_SETTINGS_DIR && middleman -p 4005 &
+  echo "-> Starting settings middleman server (http://localhost:4005)"
+  cd $FH_SETTINGS_DIR && bundle exec middleman -p 4005 &
 fi
 
 # TODO
@@ -77,7 +77,7 @@ fi
 # fi
 
 if [ FH_KB_DIR ] && [ -e $FH_KB_DIR ] ; then
-  echo "-> Starting kb middleman server"
-  cd $FH_KB_DIR && middleman &
+  echo "-> Starting kb middleman server (http://mystrou.lvh.com:4007)"
+  cd $FH_KB_DIR && bundle exec middleman -p 4007 &
 fi
 

@@ -1,0 +1,1 @@
+Ember.Handlebars.helper 'popover-anchor', App.PopoverAnchorView
