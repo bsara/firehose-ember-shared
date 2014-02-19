@@ -18,33 +18,39 @@ Then, run the following script to create symlinks in your project to shared file
     
 The shared repo directory structure is a subset mirror of your project, start with the "source" directory. So, your project **MUST** follow the following project structure:
 
-    +-shared/
+    +-source/
       |
-      +-source/
+      +-assets/
         |
-        +-assets/
+        +-css/
+        | |
+        | +-app/
+        | | |
+        | | +-components/
+        | |
+        | +-vendor/
+        |
+        +-img/
+        | |
+        | +-app/
+        |   |
+        |   +-components/
+        |
+        +-js/
           |
-          +-css/
+          +-app/
           | |
-          | +-app/
+          | +-components/
+          | |
+          | +-helpers/
+          | |
+          | +-templates/
           | | |
           | | +-components/
           | |
-          | +-vendor/
+          | +-views/
           |
-          +-js/
-            |
-            +-app/
-            | |
-            | +-components/
-            | |
-            | +-templates/
-            | | |
-            | | +-components/
-            | |
-            | +-views/
-            |
-            +-vendor/
+          +-vendor/
             
 Obviously, an ember app is going to have a lot more than just that, but that's the min. that needs to be present. Otherwise `/.install` is going to create these directories and symlink the files to the wrong locations.
 
