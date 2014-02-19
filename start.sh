@@ -35,7 +35,6 @@ export FH_KB_DIR=~/mt/projects/firehose/kb"
 fi
 
 
-
 . $FH_CONFIG_FILE
 
 if [ FH_API_DIR ] && [ -e $FH_API_DIR ] ; then
