@@ -1,0 +1,9 @@
+<div class="overlay modal-overlay" {{action "close"}}>
+</div>
+
+<div class="modal js-modal" {{action bubbles=false}}>
+	<a {{action "close"}} class="closemodal">Close</a>
+	<div class="content js-content">
+  	{{yield}}
+  </div>
+</div>

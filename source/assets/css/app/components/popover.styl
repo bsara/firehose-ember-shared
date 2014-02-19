@@ -1,0 +1,79 @@
+.popover
+
+  z-index:100;
+  width:240px;
+  background: #fff;
+  border-radius: 6px;
+  position: relative;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+  -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.3));
+  -webkit-transform: translateZ(0);
+  padding: 0;
+  
+  &:after
+    bottom: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: #fff;
+    border-width: 15px;
+
+  &.middle:after
+    left: 50%;
+    margin-left: -15px;
+
+  &.right:after
+    right: 20px;
+
+  &.left:after
+    left: 20px;
+
+  input[type="search"]
+    font-family: 'Source Sans Pro', sans-serif;
+    width: 100%;
+    font-size: 16px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+
+  li 
+    border-bottom: 1px solid #ddd;
+    position: relative;
+
+  li a 
+    display: block;
+    padding: 8px 0 9px 30px;
+    background: url(/assets/img/check2.svg) no-repeat 7px 10px;
+    background-size: 18px;
+    color: #555;
+
+  li a:hover,
+  li a.active 
+    background-position: 7px -35px;
+    color: #c00;
+  
+  li a.active 
+    font-weight: 700;
+
+  li .delete 
+    position: absolute;
+    padding: 0;
+    text-indent: 100%; white-space: nowrap; overflow: hidden;
+    width: 35px;
+    height: 35px;
+    background: url(/assets/img/trash.svg) no-repeat 95% 5px;
+    background-size: 18px;
+    top: 0;
+    right: 0;
+  
+  li .delete:hover 
+    background-position: 95% -30px;
+  
+  .content 
+    overflow: auto;
