@@ -1,0 +1,31 @@
+#!/usr/bin/ruby
+
+require 'fileutils'
+require 'pathname'
+
+unless File.basename(Dir.getwd) == "shared" and File.exists? "update"
+  puts "You must run this from the `shared` directory. Example: `$ cd shared && ./install`"  
+  exit
+end
+
+# symlink all files in the shared "source" to the real project
+queue = ["source"]
+dir = ""
+
+while queue.count > 0
+  path = queue.shift  
+  if File.directory? path
+    for item in Dir.entries path
+      next if item[0] == '.'
+      queue.push File.join( path, item )
+    end 
+  else
+    src = Pathname.new File.expand_path( path )
+    dst = Pathname.new File.expand_path( "../#{path}" )
+    FileUtils.rm dst, force: true
+    FileUtils.mkpath File.dirname(dst)
+    relative_src = src.relative_path_from Pathname.new( File.dirname( dst ) )
+    FileUtils.symlink relative_src, dst
+    puts "Symlinked: #{relative_src} -> #{dst}"
+  end
+end

@@ -12,9 +12,14 @@ Add this as a submodule in your root project directory:
 
     $ git submodule add https://github.com/mysterioustrousers/firehose-ember-shared.git shared
 
-Then, run the following script to create symlinks in your project to shared files.
+Then, run the following script to create a post-receive hook that will symlink all shared files into their respective path in your project.
 
     $ cd shared && ./install
+    
+After that, `/.update` will be run after each `git pull`. You can also run `/.update` manually from within the `shared` submodule and it will update the symlinks.
+
+
+#### Required Project Structure
     
 The shared repo directory structure is a subset mirror of your project, start with the "source" directory. So, your project **MUST** follow the following project structure:
 
@@ -52,25 +57,14 @@ The shared repo directory structure is a subset mirror of your project, start wi
           |
           +-vendor/
             
-Obviously, an ember app is going to have a lot more than just that, but that's the min. that needs to be present. Otherwise `/.install` is going to create these directories and symlink the files to the wrong locations.
+Obviously, an ember app is going to have a lot more than just that, but that's the min. that needs to be present. Otherwise `/.update` is going to create these directories and symlink the files to the wrong locations.
 
-    
-### Staying up-to-date
-
-Periodically, it's a good idea to keep your shared submodule up to date. You would do this by:
-
-    $ cd shared
-    $ git pull -r origin master
-    $ ./install
-    
 
 ### Contributing
 
-Currently, it symlinks absolute paths. This is not ideal, it'd be much better to symlink based on relative paths. I tried for an hour to make it work and gave up. If you'd like to help with that…
+Of course, if you make any changes to anything in the shared submodule, you would:
 
-And then, of course, if you make any changes to anything in the shared submodule, you would:
-
-    cd source/js/[application]/shared
+    cd shared
     git add . -A
     git commit -am 'I did blah blah blah.'
     git pull -r origin master

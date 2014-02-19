@@ -1,28 +1,24 @@
 #!/usr/bin/ruby
 
 require 'fileutils'
+require 'pathname'
 
-unless File.basename(Dir.getwd) == "shared" and File.exists? "install" 
-  puts "You must run this from the shared directory. Example: `$ cd shared && ./install`"  
+unless File.basename(Dir.getwd) == "shared" and File.exists? "install"
+  puts "You must run this from the `shared` directory. Example: `$ cd shared && ./install`"  
   exit
 end
 
-queue = ["source"]
-dir = ""
+script = <<END
+cd ../../shared/
+./update
+END
 
-while queue.count > 0
-  path = queue.shift  
-  if File.directory? path
-    for item in Dir.entries path
-      next if item[0] == '.'
-      queue.push File.join( path, item )
-    end 
-  else
-    src = File.expand_path path
-    dst = File.expand_path "../#{path}"
-    FileUtils.rm dst, force: true
-    FileUtils.mkpath File.dirname(dst)
-    FileUtils.symlink src, dst
-    puts "Symlinked: #{src} -> #{dst}"
-  end
-end
+hook = "../.git/hooks/post-receive"
+FileUtils.rm hook, force: true
+IO.write hook, script
+
+puts "------> Added post-receive hook."
+
+system "./update"
+
+puts "------> Updated symlinks."
