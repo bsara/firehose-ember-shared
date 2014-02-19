@@ -38,8 +38,6 @@ fi
 
 . $FH_CONFIG_FILE
 
-echo $FH_API_DIR
-
 if [ FH_API_DIR ] && [ -e $FH_API_DIR ] ; then
   echo "-> Starting API rails server"
   cd $FH_API_DIR && bundle exec rails s &
