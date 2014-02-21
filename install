@@ -14,7 +14,8 @@ cd ../../shared/
 END
 
 hook = "../.git/hooks/post-receive"
-FileUtils.rm hook, force: true
+FileUtils.mkpath File.dirname(hook)
+FileUtils.rm hook, force: true 
 IO.write hook, script
 
 puts "------> Added post-receive hook."
