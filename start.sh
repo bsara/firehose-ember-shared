@@ -74,7 +74,7 @@ fi
 # fi
 
 if [ FH_KB_DIR ] && [ -e $FH_KB_DIR ] ; then
-  echo "-> Starting kb middleman server (http://mystrou.lvh.com:4007)"
+  echo "-> Starting kb middleman server (http://mystrou.lvh.me:4007)"
   cd $FH_KB_DIR && bundle exec middleman -p 4007 &
 fi
 
