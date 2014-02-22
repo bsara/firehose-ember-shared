@@ -49,6 +49,10 @@ The shared repo directory structure is a subset mirror of your project, start wi
           | |
           | +-helpers/
           | |
+          | +-misc/
+          | |
+          | +-mixins/
+          | |
           | +-templates/
           | | |
           | | +-components/
