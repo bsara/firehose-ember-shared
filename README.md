@@ -72,8 +72,12 @@ the popover so that the user cannot interact with anything outside the popover. 
 First, you need to provide an outlet for the popover to be rendered into. This must go somewhere after your main `{{outlet}}` in your `application.hbs` template:
 
 	{{outlet popover}}
+	
+Next make sure you include the `App.PopoverEventsMixin` in your `ApplicationRoute`:
 
-Use the `popover-anchor` template helper to render a link in your template that will trigger the opening of a popover:
+	App.ApplicationRoute = Ember.Route.extend App.PopoverEventsMixin,
+
+Finally, use the `popover-anchor` template helper to render a link in your template that will trigger the opening of a popover:
 
 	{{#popover-anchor 
     name='companyPickerPopover'		// The name of the controller that will manage this popover. In this case `App.CompanyPickerPopoverController` 
@@ -93,7 +97,11 @@ First, you need to provide an outlet for the modal to be rendered into. This mus
 
 	{{outlet modal}}
 	
-Use the `modal-anchor` template helper to render a link in your template that will trigger the opening of a modal:
+Next make sure you include the `App.ModalEventsMixin` in your `ApplicationRoute`:
+
+	App.ApplicationRoute = Ember.Route.extend App.ModalEventsMixin,
+	
+Finally, use the `modal-anchor` template helper to render a link in your template that will trigger the opening of a modal:
     
     {{#modal-anchor 
     name='newCannedResponseModal'	// The name of the controller that will manage this modal. In this case `App.NewCannedResponseModalController` 
