@@ -11,6 +11,7 @@ end
 # symlink all files in the shared "source" to the real project
 queue = ["source"]
 dir = ""
+symlinks_created = []
 
 while queue.count > 0
   path = queue.shift  
@@ -27,5 +28,14 @@ while queue.count > 0
     relative_src = src.relative_path_from Pathname.new( File.dirname( dst ) )
     FileUtils.symlink relative_src, dst
     puts "Symlinked: #{relative_src} -> #{dst}"
+    symlinks_created.push "/#{path}"
   end
 end
+
+# add symlinks to local exclude file
+# All of these files are maintained locally and adding to .gitignore is just one more file to risk merge conflicts.
+ignore_contents = symlinks_created.join("\n")
+IO.write "../.git/info/exclude", ignore_contents
+
+
+
