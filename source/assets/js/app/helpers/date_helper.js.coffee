@@ -3,3 +3,6 @@ Ember.Handlebars.registerBoundHelper 'sinceString', (date) ->
 
 Ember.Handlebars.registerBoundHelper 'fullDateString', (date) ->
   moment(date).format 'MMMM Do, YYYY · h:mma'
+
+Ember.Handlebars.registerBoundHelper 'fullDayMonthYearString', (date) ->
+  moment(date).format 'MMMM Do, YYYY'
