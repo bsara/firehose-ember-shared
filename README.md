@@ -8,16 +8,22 @@ Shared components among Firehose client ember apps
 
 **NOTE**: This is not meant to be cloned down as an independent repo. It is inteded to be included in ember projects as a submodule.
 
-Add this as a submodule in your root project directory:
+If you are creating a new client app, add this as a submodule in your root project directory:
 
     $ git submodule add https://github.com/mysterioustrousers/firehose-ember-shared.git shared
+    
+## Configuring Shared Components
 
-Then, run the following script to create a post-receive hook that will symlink all shared files into their respective path in your project.
+If you are cloning an existing client app that already contains this repo as a submodule (such as `firehose-browser`, `firehose-billing`, etc.), run these commands to configure the submodule for the first time:
+
+    $ git submodule init
+    $ git submodule update
+
+This will update the `shared` folder, in the root directory of every project, with all the shared files. Then, run the following script to create a post-receive hook that will symlink all shared files into their respective path in your project.
 
     $ cd shared && ./install
-    
-After that, `/.update` will be run after each `git pull`. You can also run `/.update` manually from within the `shared` submodule and it will update the symlinks.
 
+After that, `/.update` will be run after each `git pull`. You can also run `/.update` manually from within the `shared` submodule and it will update the symlinks.
 
 #### Required Project Structure
     
