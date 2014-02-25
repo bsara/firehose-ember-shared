@@ -2,6 +2,9 @@ App.MarkdownEditorComponent = Ember.TextArea.extend
 
   strategies: 'cannedResponse'
   
+  wrapsFileLinksInMarkdown: true
+  
+  
   # public
   
   attachFile: (file) ->
@@ -39,7 +42,10 @@ App.MarkdownEditorComponent = Ember.TextArea.extend
       progress: (percent) =>
         this._swapPlaceholderContent "#{percent}%"
       success: (link) =>
-        string = "![#{file.name}](#{link})"
+        if @get('wrapsFileLinksInMarkdown')
+          string = "![#{file.name}](#{link})"
+        else
+          string = link
         this._swapPlaceholderContent string, true
       error: (error) =>
         this._swapPlaceholderContent "", true
