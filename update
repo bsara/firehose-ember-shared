@@ -3,15 +3,18 @@
 require 'fileutils'
 require 'pathname'
 
+
 unless File.basename(Dir.getwd) == "shared" and File.exists? "update"
   puts "You must run this from the `shared` directory. Example: `$ cd shared && ./install`"  
   exit
 end
 
+
 # symlink all files in the shared "source" to the real project
 queue = ["source"]
 dir = ""
 symlinks_created = []
+
 
 while queue.count > 0
   path = queue.shift  
@@ -31,6 +34,7 @@ while queue.count > 0
     symlinks_created.push "/#{path}"
   end
 end
+
 
 # add symlinks to local exclude file
 # All of these files are maintained locally and adding to .gitignore is just one more file to risk merge conflicts.
