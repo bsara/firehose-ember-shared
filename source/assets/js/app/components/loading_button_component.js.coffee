@@ -8,7 +8,9 @@ App.LoadingButtonComponent = Ember.Component.extend
   
   loadingText: "Saving…"
   
-  click: ->
+  click: (e) ->
+    e.preventDefault()
+    e.stopPropagation()
     if !this.get('isLoading')
       this.set 'isLoading', true
       this.sendAction 'action', =>
