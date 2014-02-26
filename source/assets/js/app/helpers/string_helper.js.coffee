@@ -3,5 +3,6 @@ Ember.Handlebars.registerBoundHelper 'padLeft', (value, length, paddingCharacter
   if !length? then throw "length cannot be null!"
   if !paddingCharacter? then throw "paddingCharacter cannot be null!"
   
-  (value = paddingCharacter + value) while (value.length < length)
-  value
+  result = String(value)
+  (result = paddingCharacter + result) while (result.length < length)
+  result
