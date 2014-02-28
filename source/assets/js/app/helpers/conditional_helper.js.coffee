@@ -33,6 +33,11 @@ Ember.Handlebars.registerHelper "ifstartswith", (value, prefix, options) ->
   prefix = Ember.Handlebars.get(this, prefix, options);
   return String(value).indexOf(String(prefix)) == 0
 
+Ember.Handlebars.registerHelper "unlesstartswith", (value, prefix, options) ->
+  value = Ember.Handlebars.get(this, value, options);
+  prefix = Ember.Handlebars.get(this, prefix, options);
+  return String(value).indexOf(String(prefix)) != 0
+
 Ember.Handlebars.registerHelper "ifendswith", (value, suffix, options) ->
   value = Ember.Handlebars.get(this, value, options);
   suffix = Ember.Handlebars.get(this, suffix, options);
@@ -41,3 +46,12 @@ Ember.Handlebars.registerHelper "ifendswith", (value, suffix, options) ->
   tempSuffix = String(suffix)
   
   return tempValue.lastIndexOf(tempSuffix) == (tempValue.length - (tempValue.length + 1))
+
+Ember.Handlebars.registerHelper "unlessendswith", (value, suffix, options) ->
+  value = Ember.Handlebars.get(this, value, options);
+  suffix = Ember.Handlebars.get(this, suffix, options);
+
+  tempValue = String(value)
+  tempSuffix = String(suffix)
+  
+  return tempValue.lastIndexOf(tempSuffix) != (tempValue.length - (tempValue.length + 1))
