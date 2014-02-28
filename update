@@ -39,6 +39,7 @@ end
 # add symlinks to local exclude file
 # All of these files are maintained locally and adding to .gitignore is just one more file to risk merge conflicts.
 ignore_contents = symlinks_created.join("\n")
+FileUtils.mkpath "../.git/info"
 IO.write "../.git/info/exclude", ignore_contents
 
 
