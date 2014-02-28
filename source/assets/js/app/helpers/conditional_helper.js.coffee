@@ -33,7 +33,7 @@ Ember.Handlebars.registerHelper "ifstartswith", (value, prefix, options) ->
   prefix = Ember.Handlebars.get(this, prefix, options);
   return String(value).indexOf(String(prefix)) == 0
 
-Ember.Handlebars.registerHelper "unlesstartswith", (value, prefix, options) ->
+Ember.Handlebars.registerHelper "unlessstartswith", (value, prefix, options) ->
   value = Ember.Handlebars.get(this, value, options);
   prefix = Ember.Handlebars.get(this, prefix, options);
   return String(value).indexOf(String(prefix)) != 0
