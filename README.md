@@ -168,7 +168,7 @@ That will display a spinner in the applications main `{{outlet}}` until content 
 ##### customers/loading.hbs
 
 	<section id="messages" class="conversation js-interactions-list">
-  		{{firehose-spinner}}
+  		{{firehose-spinner color="#000" length="5" width="2" radius="30"}}
 	</section> 
 
 
