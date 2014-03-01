@@ -4,22 +4,29 @@ App.FirehoseSpinnerComponent = Ember.Component.extend
     
   spinner: null
   
-  length  : 8       # The length of each line
-  width   : 4       # The line thickness
-  radius  : 8       # The radius of the inner circle
+  # defaults
+  width   : 3       # The line thickness
+  height  : 25      # The length of each line
   color   : '#FFF'  # #rgb or #rrggbb or array of colors
 
   showSpinner: (->
-    @spinner = new Spinner
-      length   : this.get 'length'
-      width    : this.get 'width'
-      radius   : this.get 'radius'
-      color    : this.get 'color'
-    @spinner.spin @get('element')
+    $this = @$()
+    $this.html '<div class="progress-indicator"><p>Loading</p></div>'
+    indicator = $this.find('.progress-indicator p')
+    indicator.css 
+      backgroundColor : @get('color')
+      width           : @get('width')
+      height          : @get('height')
+    deg = 0
+    @spinner = setInterval ->
+      indicator.css 
+        transform : "rotate(#{deg}deg)"
+      deg = if deg > 360 then 0 else deg + 5
+    , 10 
   ).on 'didInsertElement'
   
   teardown: (->
-    @spinner.stop()
+    clearInterval @spinner
   ).on 'willDestroyElement'
     
 Ember.Handlebars.helper 'firehose-spinner', App.FirehoseSpinnerComponent
