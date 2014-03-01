@@ -1,14 +1,20 @@
 merge = (firehoseClassName, emberClass) ->
   firehoseClass = Firehose[firehoseClassName]
   
-  Firehose.Object.prototype.set = Ember.Object.prototype.set
-  Firehose.Object.prototype.get = Ember.Object.prototype.get
+  return if firehoseClass.extend?
+  
+  Firehose.Object.prototype.set = emberClass.prototype.set
+  Firehose.Object.prototype.get = emberClass.prototype.get
   
   if firehoseClass.__super__.constructor == Firehose.Object
-    combinedClass = Ember.Object.extend firehoseClass.prototype
+    combinedClass = emberClass.extend firehoseClass.prototype
   else
-    parentClassName = firehoseClass.__super__.constructor.name
-    combinedClass = Firehose[parentClassName].extend firehoseClass.prototype
+    parentClassName = firehoseClass.__super__.constructor._firehoseType
+    parentClass = Firehose[parentClassName]
+    unless parentClass.extend?
+      merge parentClassName, emberClass
+    parentClass = Firehose[parentClassName]
+    combinedClass = parentClass.extend firehoseClass.prototype
   
   $.extend combinedClass, firehoseClass
   
@@ -28,4 +34,3 @@ $.extend Ember.CoreObject, Firehose.Object
 for key, klass of Firehose
   if klass.prototype instanceof Firehose.Object
     merge key, Ember.Object
-    
