@@ -2,6 +2,21 @@
 
 require 'fileutils'
 require 'pathname'
+require 'json'
+
+class Hash
+  def deep_merge(other_hash, &block)
+    other_hash.each_pair do |k,v|
+      tv = self[k]
+      if tv.is_a?(Hash) && v.is_a?(Hash)
+        self[k] = tv.deep_merge(v, &block)
+      else
+        self[k] = block && tv ? block.call(k, tv, v) : v
+      end
+    end
+    self
+  end
+end
 
 unless File.basename(Dir.getwd) == "shared" and File.exists? "install"
   puts "You must run this from the `shared` directory. Example: `$ cd shared && ./install`"  
@@ -23,3 +38,13 @@ puts "------> Added post-receive hook."
 system "./update"
 
 puts "------> Updated symlinks."
+
+
+puts "------> Merging bower.json file."
+
+shared_bower  = JSON.parse( IO.read('bower.json') )
+project_bower = JSON.parse( IO.read('../bower.json') )
+merged_bower  = project_bower.deep_merge shared_bower
+IO.write '../bower.json', JSON.pretty_generate( merged_bower )
+
+
