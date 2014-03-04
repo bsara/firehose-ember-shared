@@ -1,7 +1,11 @@
 App.ModalDialogComponent = Ember.Component.extend 
 
 
-  size: { width: 600, height: 600 }
+  size    : { width: 600, height: 600 }
+  
+  modal   : null
+  
+  content : null
   
   
   actions:
@@ -10,23 +14,47 @@ App.ModalDialogComponent = Ember.Component.extend
       
 
   didInsertElement: ->
-    options     = this.get 'options'
-    $modal      = this.$ '.js-modal'
-    $content    = this.$ '.js-content'
+    options      = this.get 'options'
+    @modal       = this.$ '.js-modal'
+    @content     = this.$ '.js-content'
+    @size.width  = if options.size then options.size.width else @size.width
+    @size.height = if options.size then options.size.height else @size.height
+    @_layout()    
+    $(window).on 'resize', $.proxy(@_layout, this)
+    @modal.find('input').first().focus()
     
-    sizeWidth   = if options.size then options.size.width else @size.width
-    sizeHeight  = if options.size then options.size.height else @size.height
     
-    top         = ($( document ).height() / 2) - (sizeHeight / 2)
-    left        = ($( document ).width() / 2) - (sizeWidth / 2)
+  willDestroyElement: ->
+    $(window).off 'resize', $.proxy(@_layout, this)
+    
+    
+  _layout: ->
+    widthString  = @size.width
+    heightString = @size.height
+    
+    if widthString.match /%$/
+      percent = Number( widthString.replace( /\D/g, "" ) ) / 100.0
+      width   = $(window).width() * percent
+    else
+      width   = Number widthString
+      
+    if heightString.match /%$/
+      percent = Number( heightString.replace( /\D/g, "" ) ) / 100.0
+      height  = $(window).height() * percent
+    else
+      height  = Number heightString
+    
+    margin = parseInt(@content.css('margin'))
+    if @content.height() < height and heightString[0] == '<'
+      height = @content.height() + margin * 2
+    else
+      @content.height(height - margin * 2)
+    
+    top  = ($( document ).height() / 2) - (height / 2)
+    left = ($( document ).width() / 2) - (width / 2)
   
-    $modal.css
-      top:    top
-      left:   left
-      width:  sizeWidth
-      
-    if $content.height() > sizeHeight
-      $content.height( sizeHeight - parseInt($content.css('margin')) * 2 )
-      $modal.height sizeHeight
-      
-    $modal.find('input').first().focus()
+    @modal.css
+      top    : top
+      left   : left
+      width  : width 
+      height : height

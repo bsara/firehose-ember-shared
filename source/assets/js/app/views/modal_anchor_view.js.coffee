@@ -13,10 +13,10 @@ App.ModalAnchorView = Ember.View.extend
     
     
   sizeHash: (->
-    size  = @size || "0,0"
-    parts = @size.split ","
+    size   = @size || "0,0"
+    parts  = @size.split ","
     r =
-      width: parseInt parts[0]
-      height: parseInt parts[1]
+      width  : parts[0]
+      height : parts[1]
   ).property('size')
   
