@@ -10,7 +10,6 @@
     "js-md5"             : "~1.1.0",
     "js-url"             : "~1.8.6",
     "markdown"           : "~0.5.0",
-    "pen"                : "~0.0.1",
     "ember-view-animate" : "~1.0.0"
   }
 }
