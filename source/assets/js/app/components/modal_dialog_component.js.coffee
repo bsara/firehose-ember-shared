@@ -1,7 +1,7 @@
 App.ModalDialogComponent = Ember.Component.extend 
 
 
-  size    : { width: 600, height: 600 }
+  size    : { width: "600", height: "600" }
   
   modal   : null
   
@@ -32,17 +32,13 @@ App.ModalDialogComponent = Ember.Component.extend
     widthString  = @size.width
     heightString = @size.height
     
+    width = Number widthString.replace( /\D/g, "" )
     if widthString.match /%$/
-      percent = Number( widthString.replace( /\D/g, "" ) ) / 100.0
-      width   = $(window).width() * percent
-    else
-      width   = Number widthString
+      width = $(window).width() * ( width / 100.0)
       
+    height = Number heightString.replace( /\D/g, "" )
     if heightString.match /%$/
-      percent = Number( heightString.replace( /\D/g, "" ) ) / 100.0
-      height  = $(window).height() * percent
-    else
-      height  = Number heightString
+      height = $(window).height() * ( height / 100.0 )
     
     margin = parseInt(@content.css('margin'))
     if @content.height() < height and heightString[0] == '<'
