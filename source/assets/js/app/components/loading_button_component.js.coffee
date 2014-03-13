@@ -1,5 +1,7 @@
 App.LoadingButtonComponent = Ember.Component.extend
 
+  attributeBindings: ['disabled']
+
   tagName: 'button'
 
   isLoading: false
