@@ -22,7 +22,9 @@ App.ModalDialogComponent = Ember.Component.extend
     @_layout()    
     $(window).on 'resize', $.proxy(@_layout, this)
     @modal.find('input').first().focus()
-    
+    Ember.run.schedule 'afterRender', =>
+      $(window).resize()
+        
     
   willDestroyElement: ->
     $(window).off 'resize', $.proxy(@_layout, this)
@@ -54,3 +56,4 @@ App.ModalDialogComponent = Ember.Component.extend
       left   : left
       width  : width 
       height : height
+      
