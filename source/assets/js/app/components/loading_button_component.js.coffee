@@ -18,3 +18,9 @@ App.LoadingButtonComponent = Ember.Component.extend
       this.sendAction 'action', =>
         this.set 'isLoading', false
     
+  disabledChanged: (->
+    if this.get 'disabled'
+      @$().attr 'disabled', 'disabled'
+    else
+      @$().removeAttr 'disabled'
+  ).observes 'disabled'
