@@ -9,3 +9,13 @@
 <% if current_page.data.show_ios_app_banner %>
 <meta name="apple-itunes-app" content="app-id=658111353">
 <% end %>
+<script>
+  // use the access token in the url if there is one
+  // we need to grab and store this before ember takes over
+  var match = window.location.href.match(/\?access_token=\w*/)
+  if (match) {
+    token = match[0].split("=")[1];
+    localStorage.accessToken = token;
+    window.location = window.location.href.replace(match[0], "")
+  }
+</script>
