@@ -1,6 +1,6 @@
 App.ModalEventsMixin = Ember.Mixin.create
-   
-  actions:     
+
+  actions:
     openModal: (options) ->
       controller = this.controllerFor options.name
       controller.modalOptions = options
@@ -8,8 +8,8 @@ App.ModalEventsMixin = Ember.Mixin.create
       this.render options.name,
         into:   'application'
         outlet: 'modal'
-        
+
     closeModal: ->
       this.disconnectOutlet
         outlet:     'modal'
-        parentView: 'application' 
+        parentView: 'application'

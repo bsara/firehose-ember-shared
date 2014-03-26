@@ -8,7 +8,7 @@ App.PopoverEventsMixin = Ember.Mixin.create
       this.render options.name,
         into:   'application'
         outlet: 'popover'
-    
+
     closePopover: ->
       this.disconnectOutlet
         outlet:     'popover'
