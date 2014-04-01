@@ -1,7 +1,7 @@
 class NotificationCenter
   
   
-  @defaultCenter: null
+  @shared: null
   
   _observations: null
   
@@ -35,4 +35,4 @@ class NotificationCenter
         
         
 window.NotificationCenter = NotificationCenter
-window.NotificationCenter.defaultCenter = new NotificationCenter()
+window.NotificationCenter.shared = new NotificationCenter()
