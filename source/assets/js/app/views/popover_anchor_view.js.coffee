@@ -9,8 +9,8 @@ App.PopoverAnchorView = Ember.View.extend
     # with a better way of seeing if a child element
     # was the one that was clicked, but for now this
     # works
-    if event.toElement.parentElement.tagName == "A"
-      event.toElement.parentElement.click()
+    if event.target.parentElement.tagName == "A"
+      event.target.parentElement.click()
     else
       options =
         name:   this.get 'name'
