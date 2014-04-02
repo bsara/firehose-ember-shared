@@ -1,0 +1,7 @@
+# Misc Files/Folders
+.DS_Store
+.svn
+*~
+
+# Build Files/Folders
+/components
