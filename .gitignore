@@ -1,7 +1,13 @@
 # Misc Files/Folders
 .DS_Store
 .svn
+
+
+# Temporary Files/Folders
 *~
+/.sass-cache
+
 
 # Build Files/Folders
+/build
 /components
