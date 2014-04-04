@@ -11,3 +11,8 @@
 # Build Files/Folders
 /build
 /components
+
+
+# Sublime Files/Folders
+/*.sublime-workspace
+/*.sublime-project
