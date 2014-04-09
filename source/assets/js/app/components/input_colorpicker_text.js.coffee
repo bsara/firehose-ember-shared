@@ -7,10 +7,12 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
     "useAllCaps",           # (boolean) <TODO: Add description>. Default = true
 
     "pickerValueSelector",  # (jQuery Selector) <TODO: Add description>. Default = this
-    "pickerStyleSelector",  # (jQuery Selector) <TODO: Add description>. Default = this
+    "pickerStyleSelector",  # (jQuery Selector) <TODO: Add description>. Default = null
     "pickerStyleAttribute", # (string) <TODO: Add description>. Default = 'color'
 
-    "setColorEvent"         # (enum) Options: 'change', 'submit', 'hide'. Default = 'change'
+    "setColorEvent",        # (enum) Options: 'change', 'submit', 'hide'. Default = 'change'
+
+    "updateColors"          # (function) READ-ONLY
   ]
 
   attributeBindings: [
@@ -32,10 +34,28 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
 
 
   didInsertElement: ->
-    options              = {}
+    options = {}
 
-    @useAllCaps          = true     if @useAllCaps == undefined || typeof @useAllCaps != "boolean"
-    @setColorEvent       = "change" if @setColorEvent? || [ "change", "submit", "hide" ].indexOf(@setColorEvent) < 0
+    @useAllCaps = true if @useAllCaps == undefined || typeof @useAllCaps != "boolean"
+
+    @pickerValueSelector  = this     if !@pickerValueSelector?
+    @pickerStyleSelector  = null     if !@pickerStyleSelector?
+    @pickerStyleAttribute = "color"  if !@pickerStyleAttribute?
+
+    @setColorEvent = "change" if !@setColorEvent? || [ "change", "submit", "hide" ].indexOf(@setColorEvent) < 0
+
+    @updateColors = (hex) ->
+      hexString = String(hex)
+
+      if hexString.indexOf("#") < 0
+        hexString = "#" + hexString
+      if @useAllCaps == true
+        hexString = hexString.toUpperCase()
+
+      $(@pickerValueSelector)?.each(-> $(this).attr("value", hexString))
+
+      if @pickerStyleSelector?
+        $(@pickerStyleSelector)?.each(-> $(this).css(@pickerStyleAttribute, hexString))
 
     options.flat         = @isPickerFlat         if @isPickerFlat != undefined
     options.livePreview  = @usePickerLivePreview if @usePickerLivePreview != undefined
@@ -52,35 +72,23 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
 
   defaultOnBeforeShowPicker: ->
     $(this).ColorPickerSetColor(@value)
-    this.sendAction "onBeforeShowPickerAction" if @onBeforeShowPickerAction?
+    @sendAction "onBeforeShowPickerAction" if @onBeforeShowPickerAction?
 
 
   defaultOnShowPicker: (colroPicker) ->
-    this.sendAction "onShowPickerAction" if @onShowPickerAction?
+    @sendAction "onShowPickerAction" if @onShowPickerAction?
 
 
   defaultOnChangePicker: (hsb, hex, rgb) ->
     @updateColors(hex) if !@setColorEvent? || @setColorEvent == "change"
-    this.sendAction "onChangePickerAction" if @onChangePickerAction?
+    @sendAction "onChangePickerAction" if @onChangePickerAction?
 
 
   defaultOnSubmitPicker: (hsb, hex, rgb, element) ->
     @updateColors(hex) if @setColorEvent == "submit"
-    this.sendAction "onSubmitPickerAction" if @onSubmitPickerAction?
+    @sendAction "onSubmitPickerAction" if @onSubmitPickerAction?
 
 
   defaultOnHidePicker: (colroPicker) ->
     @updateColors(hex) if @setColorEvent == "hide"
-    this.sendAction "onHidePickerAction" if @onHidePickerAction?
-
-
-  updateColors: (hex) ->
-    hexString = String(hex)
-
-    if hexString.indexOf("#") < 0
-      hexString = "#" + hexString
-    if @useAllCaps == true
-      hexString = hexString.toUpperCase()
-
-    $(@pickerValueSelector)[0].attr("value", hexString);
-    $(@pickerStyleSelector)[0].css(@pickerStyleAttribute, hexString)
+    @sendAction "onHidePickerAction" if @onHidePickerAction?
