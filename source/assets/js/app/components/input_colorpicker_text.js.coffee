@@ -1,12 +1,14 @@
 App.InputColorpickerTextComponent = Ember.TextField.extend
   attributes: [
-    "isPickerFlat",         # (boolean) <TODO: Add description>. Default: true
-    "usePickerLivePreview", # (boolean) <TODO: Add description>. Default: true
-    "showPickerEvent",      # (string) <TODO: Add description>. Default: 'click'
+    "isPickerFlat",         # (boolean) Whether the color picker is appended to the element or triggered by an event. Default: false
+    # "usePickerLivePreview", # (boolean) Whether the color values are filled in the fields while changing values on selector or a field. If false it may improve speed. Default: true
+    "defaultColor",         # (string) The default color. String for hex color or hash for RGB and HSB ({r:255, r:0, b:0}). Default: 'ff0000'
+    "showPickerEvent",      # (string) The desired event to trigger the colorpicker. Default: 'click'
 
-    "useAllCaps",           # (boolean) <TODO: Add description>. Default: true
+    "useAllCaps",           # (boolean) When true, all capital letters are used for hex representations of colors. Default: true
 
     "pickerPosition",       # (enum) Determines where the color picker will appear relative to the input field.
+                            #        If a value is given that is not listed below, then the default will be used.
                             #
                             #        Options:
                             #           'top'         # The picker's bottom left corner will touch the input field's top left corner.
@@ -26,27 +28,35 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
                             #        Default:
                             #           'bottom'
 
-    "pickerValueSelector",  # (jQuery Selector) <TODO: Add description>. Default: this
-    "pickerStyleSelector",  # (jQuery Selector) <TODO: Add description>. Default: null
-    "pickerStyleAttribute", # (string) <TODO: Add description>. Default: 'color'
+    "pickerValueSelector",  # (jQuery Selector) Used to find all elements that should have their values updated when the color is updated. Default: this
+    "pickerStyleSelector",  # (jQuery Selector) Used to find all elements that should have their CSS updated when the color is updated. Default: null
+    "pickerStyleAttribute", # (string) The CSS attribute to update for the object(s) specified by 'pickerStyleSelector'. Default: 'color'
+                            #          TODO: Add ability to specify multiple attributes
 
-    "setColorEvent"        # (enum) Options: 'change', 'submit', 'hide'. Default: 'change'
+    "setColorEvent"         # (enum) The event on which the color should be set as the current color and the elements specified by 'pickerValueSelector' and
+                            #        'pickerStyleSelector' should be updated accordingly. If a value is given that is not listed below, then the default will be used.
+                            #
+                            #        Options:
+                            #          'change', 'submit', 'hide'
+                            #
+                            #        Default:
+                            #          'change'
   ]
 
   attributeBindings: [
-    "onBeforeShowPickerAction", # (action) <TODO: Add description>. Default: null
-    "onShowPickerAction",       # (action) <TODO: Add description>. Default: null
-    "onChangePickerAction",     # (action) <TODO: Add description>. Default: null
-    "onSubmitPickerAction",     # (action) <TODO: Add description>. Default: null
-    "onHidePickerAction"        # (action) <TODO: Add description>. Default: null
+    "onBeforeShowPickerAction", # (ember.js action) Ember action to perform during 'onBeforeShowPicker'. Default: null
+    "onShowPickerAction",       # (ember.js action) Ember action to perform during 'onShowPicker'. Default: null
+    "onChangePickerAction",     # (ember.js action) Ember action to perform during 'onChangePicker'. Default: null
+    "onSubmitPickerAction",     # (ember.js action) Ember action to perform during 'onSubmitPicker'. Default: null
+    "onHidePickerAction"        # (ember.js action) Ember action to perform during 'onHidePicker'. Default: null
   ]
 
   events: [
-    "onBeforeShowPicker", # (function name) <TODO: Add description>. If not explicitly set, a default function will be used.
-    "onShowPicker",       # (function name) <TODO: Add description>. If not explicitly set, a default function will be used.
-    "onChangePicker",     # (function name) <TODO: Add description>. If not explicitly set, a default function will be used.
-    "onSubmitPicker",     # (function name) <TODO: Add description>. If not explicitly set, a default function will be used.
-    "onHidePicker"        # (function name) <TODO: Add description>. If not explicitly set, a default function will be used.
+    "onBeforeShowPicker", # (function) Callback function triggered before the color picker is shown. If not explicitly set, a default function will be used.
+    "onShowPicker",       # (function) Callback function triggered when the color picker is shown. If not explicitly set, a default function will be used.
+    "onChangePicker",     # (function) Callback function triggered when the color is changed. If not explicitly set, a default function will be used.
+    "onSubmitPicker",     # (function) Callback function triggered when the color it is chosen. If not explicitly set, a default function will be used.
+    "onHidePicker"        # (function) Callback function triggered when the color picker is hidden. If not explicitly set, a default function will be used.
   ]
 
 
@@ -66,7 +76,8 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
     @setColorEvent = "change" if !@setColorEvent? || [ "change", "submit", "hide" ].indexOf(@setColorEvent) < 0
 
     options.flat         = @isPickerFlat         if @isPickerFlat != undefined
-    options.livePreview  = @usePickerLivePreview if @usePickerLivePreview != undefined
+    # options.livePreview  = @usePickerLivePreview if @usePickerLivePreview != undefined
+    options.color        = @defaultColor         if @defaultColor != undefined
     options.eventName    = @showPickerEvent      if @showPickerEvent != undefined
 
 
