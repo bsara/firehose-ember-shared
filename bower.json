@@ -11,6 +11,6 @@
     "js-url"             : "~1.8.6",
     "markdown"           : "~0.5.0",
     "ember-view-animate" : "~1.0.0",
-    "colorpicker": "http://www.eyecon.ro/colorpicker/colorpicker.zip"
+    "pickacolor.js"      : "bsara/pickacolor.js"
   }
 }
