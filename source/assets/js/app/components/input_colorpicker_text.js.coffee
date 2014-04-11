@@ -3,7 +3,7 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
     "isPickerFlat",         # (boolean) Whether the color picker is appended to the element or triggered by an event. Default: false
     # "usePickerLivePreview", # (boolean) Whether the color values are filled in the fields while changing values on selector or a field. If false it may improve speed. Default: true
     "defaultColor",         # (string) The default color. String for hex color or hash for RGB and HSB ({r:255, r:0, b:0}). Default: 'ff0000'
-    "showPickerEvent",      # (string) The desired event to trigger the colorpicker. Default: 'click'
+    "showPickerEvent",      # (string) The desired event to trigger the color picker. Default: 'click'
 
     "useAllCaps",           # (boolean) When true, all capital letters are used for hex representations of colors. Default: true
 
@@ -11,22 +11,22 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
                             #        If a value is given that is not listed below, then the default will be used.
                             #
                             #        Options:
-                            #           'top'         # The picker's bottom left corner will touch the input field's top left corner.
-                            #           'top-left'    # The picker's bottom right corner will touch the input field's top right corner.
+                            #           'top-left'     # The picker's bottom left corner will touch the input field's top left corner.
+                            #           'top-right'    # The picker's bottom right corner will touch the input field's top right corner.
                             #
-                            #           'bottom'      # The picker's top left corner will touch the input field's bottom left corner.
-                            #           'bottom-left' # The picker's top right corner will touch the input field's bottom right corner.
+                            #           'bottom-left'  # The picker's top left corner will touch the input field's bottom left corner.
+                            #           'bottom-right' # The picker's top right corner will touch the input field's bottom right corner.
                             #
-                            #           'left'        # The picker's right side will touch the input field's left side and be centered with the input field.
-                            #           'left-high'   # The picker's bottom right corner will touch the input field's bottom left corner.
-                            #           'left-low'    # The picker's top right corner will touch the input field's top left corner.
+                            #           'left'         # The picker's right side will touch the input field's left side and be centered with the input field.
+                            #           'left-top'     # The picker's bottom right corner will touch the input field's bottom left corner.
+                            #           'left-bottom'  # The picker's top right corner will touch the input field's top left corner.
                             #
-                            #           'right'       # The picker's left side will touch the input field's right side and be centered with the input field.
-                            #           'right-high'  # The picker's bottom left corner will touch the input field's bottom right corner.
-                            #           'right-low'   # The picker's top left corner will touch the input field's top right corner.
+                            #           'right'        # The picker's left side will touch the input field's right side and be centered with the input field.
+                            #           'right-top'    # The picker's bottom left corner will touch the input field's bottom right corner.
+                            #           'right-bottom' # The picker's top left corner will touch the input field's top right corner.
                             #
                             #        Default:
-                            #           'bottom'
+                            #           'bottom-left'
 
     "pickerValueSelector",  # (jQuery Selector) Used to find all elements that should have their values updated when the color is updated. Default: this
     "pickerStyleSelector",  # (jQuery Selector) Used to find all elements that should have their CSS updated when the color is updated. Default: null
@@ -67,7 +67,13 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
 
     @useAllCaps = true if @useAllCaps == undefined || typeof @useAllCaps != "boolean"
 
-    @pickerPosition = "bottom" if !@pickerPosition? || [ "top", "top-left", "bottom", "bottom-left", "left", "left-high", "left-low", "right", "right-high", "right-low" ].indexOf(@pickerPosition) < 0
+    availablePickerPositions = [
+      "top-left",    "top-right",
+      "bottom-left", "bottom-right",
+      "left",        "left-top",     "left-bottom",
+      "right",       "right-top",    "right-bottom"
+    ]
+    @pickerPosition = "bottom-left" if !@pickerPosition? || availablePickerPositions.indexOf(@pickerPosition) < 0
 
     @pickerValueSelector  = this     if !@pickerValueSelector?
     @pickerStyleSelector  = null     if !@pickerStyleSelector?
@@ -79,11 +85,12 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
     # options.livePreview  = @usePickerLivePreview if @usePickerLivePreview != undefined
     options.color        = @defaultColor         if @defaultColor != undefined
     options.eventName    = @showPickerEvent      if @showPickerEvent != undefined
+    options.position     = @pickerPosition       if @pickerPosition != undefined
 
 
     if !@onBeforeShowPicker?
       options.onBeforeShow = ->
-        $(this).ColorPickerSetColor(@value)
+        $(this).PickAColorSetColor(@value)
         emberObject.sendAction "onBeforeShowPickerAction" if emberObject.onBeforeShowPickerAction?
     else
       options.onBeforeShow = emberObject.onBeforeShowPicker
@@ -108,7 +115,7 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
       options.onSubmit = (hsb, hex, rgb, element) ->
         emberObject.updateColors(hex) if emberObject.setColorEvent == "submit"
         emberObject.sendAction "onSubmitPickerAction" if emberObject.onSubmitPickerAction?
-        $(element).ColorPickerHide()
+        $(element).PickAColorHide()
     else
       options.onSubmit = emberObject.onSubmitPicker
 
@@ -121,7 +128,7 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
       options.onHide = emberObject.onHidePikcer
 
 
-    this.$().ColorPicker(options)
+    this.$().PickAColor(options)
 
 
   updateColors: (hex) ->
