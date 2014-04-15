@@ -1,3 +1,5 @@
+#= require vendor/ember_unique_array
+
 merge = (firehoseClassName, emberClass) ->
   firehoseClass = Firehose[firehoseClassName]
   
@@ -22,10 +24,7 @@ merge = (firehoseClassName, emberClass) ->
   
   Firehose[firehoseClassName] = combinedClass
 
-Firehose.UniqueArray.prototype.appendObject = Firehose.UniqueArray.prototype.addObject
-Firehose.UniqueArray.prototype.appendObjects = Firehose.UniqueArray.prototype.addObjects
-Firehose.UniqueArray.prototype.dropObject = Firehose.UniqueArray.prototype.removeObject
-Firehose.UniqueArray.prototype.dropObjects = Firehose.UniqueArray.prototype.removeObjects
+Firehose.UniqueArray = EmberUniqueArray
   
 $.extend Ember.CoreObject.prototype, Firehose.Object.prototype
 $.extend Ember.CoreObject, Firehose.Object
