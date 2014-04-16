@@ -1,4 +1,52 @@
-#= require vendor/ember_unique_array
+window.EmberUniqueArray = Ember.ArrayProxy.extend
+  
+  _sortOn: null
+  
+  _sortDirection: 'asc'
+  
+  init: ->
+    this.set "content", []
+    this._super()
+  
+  push: ->
+    this.addObject.apply this, arguments
+    
+  appendObject: ->
+    this.addObject.apply this, arguments
+  
+  appendObjects: (objects) ->
+    this.addObjects.apply this, arguments
+    
+  insertObject: ->
+    this.appendObject.apply this, arguments
+    this.sortObjects()
+    
+  insertObjects: (objects) -> 
+    this.appendObjects objects
+    this.sortObjects()
+    
+  dropObject: ->
+    this.removeObject.apply this, arguments
+      
+  dropObjects: (objects) ->
+    this.removeObjects.apply this, arguments
+
+  sortOn: (property, direction = "asc") ->
+    this.set '_sortOn', property
+    this.set '_sortDirection', direction
+    
+  sortObjects: ->
+    return unless this.get('_sortOn')?
+    this.sortBy this.get('_sortOn')
+    this.reverse() if this.get('_sortDirection') == 'desc'
+    
+  _toArchivableJSON: ->
+    archiveArray = []
+    this.forEach (obj) ->
+      archiveArray.push obj._toArchivableJSON()
+    archiveArray
+    
+    
 
 merge = (firehoseClassName, emberClass) ->
   firehoseClass = Firehose[firehoseClassName]
