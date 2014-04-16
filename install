@@ -19,7 +19,7 @@ class Hash
 end
 
 unless File.basename(Dir.getwd) == "shared" and File.exists? "install"
-  puts "You must run this from the `shared` directory. Example: `$ cd shared && ./install`"  
+  puts "You must run this from the `shared` directory. Example: `$ cd shared && ./install`"
   exit
 end
 
@@ -30,7 +30,7 @@ END
 
 hook = "../.git/modules/shared/hooks/post-receive"
 FileUtils.mkpath File.dirname(hook)
-FileUtils.rm hook, force: true 
+FileUtils.rm hook, force: true
 IO.write hook, script
 
 puts "------> Added post-receive hook."

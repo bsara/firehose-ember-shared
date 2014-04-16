@@ -2,9 +2,9 @@ App.TagInputComponent = Ember.Component.extend
 
 
   inputSelector: '.js-tag-input'
-  
+
   autocomplete: null
-  
+
   currentTags: []
 
 
@@ -12,10 +12,10 @@ App.TagInputComponent = Ember.Component.extend
     this._setup()
     @$().focus()
   ).on 'didInsertElement'
-  
-  
+
+
   _setup: ->
-    @autocomplete = new AutoComplete @$().attr('id'), 
+    @autocomplete = new AutoComplete @$().attr('id'),
       initialValue: _.map _.filter(this.get('prepopulateWithTags'), (tag) -> tag.length > 0), (tag) -> [tag]
       placeholderHTML: this.get('placeholder') || "Tags"
       lists:
@@ -32,4 +32,3 @@ App.TagInputComponent = Ember.Component.extend
           this.sendAction 'tagWasAdded', added[0], this
         if removed.length > 0
           this.sendAction 'tagWasRemoved', removed[0], this
-    

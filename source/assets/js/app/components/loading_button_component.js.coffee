@@ -2,13 +2,13 @@ App.LoadingButtonComponent = Ember.Component.extend
   tagName: "button"
 
   attributeBindings: [ "disabled", "title" ]
-  
+
   buttonText: "Save"
   loadingText: "Saving…"
 
   isLoading: false
-  
-  
+
+
   click: (e) ->
     e.preventDefault()
     e.stopPropagation()
@@ -16,8 +16,8 @@ App.LoadingButtonComponent = Ember.Component.extend
       @set "isLoading", true
       @sendAction "action", =>
         @set "isLoading", false
-        
-    
+
+
   disabledChanged: (->
     if @disabled
       this.$().attr "disabled", "disabled"

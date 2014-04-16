@@ -5,7 +5,7 @@ require 'pathname'
 
 
 unless File.basename(Dir.getwd) == "shared" and File.exists? "update"
-  puts "You must run this from the `shared` directory. Example: `$ cd shared && ./install`"  
+  puts "You must run this from the `shared` directory. Example: `$ cd shared && ./install`"
   exit
 end
 
@@ -17,12 +17,12 @@ symlinks_created = []
 
 
 while queue.count > 0
-  path = queue.shift  
+  path = queue.shift
   if File.directory? path
     for item in Dir.entries path
       next if item[0] == '.'
       queue.push File.join( path, item )
-    end 
+    end
   else
     src = Pathname.new File.expand_path( path )
     dst = Pathname.new File.expand_path( "../#{path}" )

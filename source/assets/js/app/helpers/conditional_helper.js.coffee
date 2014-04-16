@@ -44,7 +44,7 @@ Ember.Handlebars.registerHelper "ifendswith", (value, suffix, options) ->
 
   tempValue = String(value)
   tempSuffix = String(suffix)
-  
+
   return tempValue.lastIndexOf(tempSuffix) == (tempValue.length - (tempValue.length + 1))
 
 Ember.Handlebars.registerHelper "unlessendswith", (value, suffix, options) ->
@@ -53,5 +53,5 @@ Ember.Handlebars.registerHelper "unlessendswith", (value, suffix, options) ->
 
   tempValue = String(value)
   tempSuffix = String(suffix)
-  
+
   return tempValue.lastIndexOf(tempSuffix) != (tempValue.length - (tempValue.length + 1))
