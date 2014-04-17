@@ -7,6 +7,6 @@ App.ErrorNoticeComponent = Ember.Component.extend
 
   errors: []
 
-  message: "Default Message"
+  header: "Error Messages"
 
   trigger: false
