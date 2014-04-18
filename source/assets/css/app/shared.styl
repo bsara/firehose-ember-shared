@@ -1,3 +1,15 @@
+// ------------------------ //
+// Variable Declarations    //
+// ------------------------ //
+
+$border-radius = 4px
+
+
+
+// ------------------------ //
+// General                  //
+// ------------------------ //
+
 .overlay
   width:    100%
   position: fixed
@@ -9,3 +21,43 @@
 
 .hidden
   display: none !important
+
+
+
+// ------------------------ //
+// Notices                  //
+// ------------------------ //
+
+.error-notice
+  margin-bottom: 20px
+
+  h2
+    display:               minline-block
+    text-shadow:           0 1px 2px rgba(0,0,0,.3)
+    padding:               6px 11px
+    color:                 #fff
+    -webkit-border-radius: $border-radius
+    -moz-border-radius:    $border-radius
+    border-radius:         $border-radius
+    background:            #cc0000
+    text-transform:        uppercase
+    margin-right:          10px
+
+  ul
+    color:           #cc0000
+    padding:         10px 0
+    list-style-type: square
+    margin-left:     20px
+    line-height:     20px
+
+
+.success-notice
+  display:               inline-block
+  text-shadow:           0 1px 2px rgba(0,0,0,.3)
+  padding:               6px 11px
+  color:                 #fff
+  -webkit-border-radius: $border-radius
+  -moz-border-radius:    $border-radius
+  border-radius:         $border-radius
+  background:            #2C6700
+  text-transform:        uppercase

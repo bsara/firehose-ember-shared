@@ -16,8 +16,19 @@ App.FadingNoticeComponent = Ember.Component.extend
 
 
   showNotice: (->
-    if @get('trigger')
+    trigger = @get 'trigger'
+    if trigger
       element = $("##{@elementId}")
       element.show()
-      element.fadeOut(@fadeOutDuration, (=> @set('trigger', false)))
+      element.fadeOut(@fadeOutDuration, (=>
+        newTriggerValue = null
+        triggerType = typeof trigger
+
+        if triggerType == 'boolean'
+          newTriggerValue = false
+        else if triggerType == 'number'
+          newTriggerValue = 0
+
+        @set 'trigger', newTriggerValue
+      ))
   ).observes('trigger')
