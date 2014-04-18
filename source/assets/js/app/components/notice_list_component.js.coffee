@@ -5,10 +5,10 @@ App.NoticeListComponent = Ember.Component.extend
 
   class: null
 
-  classNameBindings: [ 'trigger::hidden' ]
+  classNameBindings: [ 'noticesTrigger::hidden' ]
 
   header: "Notices"
 
   notices: []
 
-  trigger: false
+  noticesTrigger: false
