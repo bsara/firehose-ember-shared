@@ -1,0 +1,2 @@
+find ../source -type l -exec test ! -e {} \; -delete
+echo "------> Cleaned up broken links."

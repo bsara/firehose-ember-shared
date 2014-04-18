@@ -43,5 +43,6 @@ FileUtils.mkpath "../.git/info"
 IO.write "../.git/info/exclude", ignore_contents
 
 
-# remove broken symlinks
-find ../source -type l -exec test ! -e {} \; -delete
+# remove broken symlink
+system ". delete_broken_links"
+
