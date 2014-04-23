@@ -3,6 +3,13 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
     "allCaps",        # (boolean) When `true,` all capital letters are used for hex representations of colors. Default: `true`
     "defaultColor",   # (string) The default color. String for hex color or hash for RGB and HSB ({r:255, r:0, b:0}). Default: `"ff0000"`
     "livePreview",    # (boolean) Whether the color values are filled in the fields while changing values on selector or a field. If false it may improve speed. Default: `true`
+
+    "onBeforeShowPickerAction", # (ember.js action) Ember action to perform during `onBeforeShowPicker`. Default: null
+    "onChangePickerAction",     # (ember.js action) Ember action to perform during `onChangePicker`. Default: null
+    "onHidePickerAction"        # (ember.js action) Ember action to perform during `onHidePicker`. Default: null
+    "onShowPickerAction",       # (ember.js action) Ember action to perform during `onShowPicker`. Default: null
+    "onSubmitPickerAction",     # (ember.js action) Ember action to perform during `onSubmitPicker`. Default: null
+
     "pickerPosition", # (enum) Determines where the color picker will appear relative to the input field.
                       #        If a value is given that is not listed below, then the default will be used.
                       #
@@ -39,14 +46,6 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
                       #          TODO: Add ability to specify multiple attributes
     "styleSelector",  # (jQuery Selector) Used to find all elements that should have their CSS updated when the color is updated. Default: `null`
     "valueSelector",  # (jQuery Selector) Used to find all elements that should have their values updated when the color is updated. Default: `this`
-  ]
-
-  attributeBindings: [
-    "onBeforeShowPickerAction", # (ember.js action) Ember action to perform during `onBeforeShowPicker`. Default: null
-    "onChangePickerAction",     # (ember.js action) Ember action to perform during `onChangePicker`. Default: null
-    "onHidePickerAction"        # (ember.js action) Ember action to perform during `onHidePicker`. Default: null
-    "onShowPickerAction",       # (ember.js action) Ember action to perform during `onShowPicker`. Default: null
-    "onSubmitPickerAction",     # (ember.js action) Ember action to perform during `onSubmitPicker`. Default: null
   ]
 
   events: [
