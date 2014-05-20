@@ -85,24 +85,32 @@ This list is ordered alphabetically.
 
 This is an extended version of a normal text field (Normal text field: `{{input type="text" ...}}`) that, when clicked, reveals a color picker which can be used to set the value of the text field. The default functionality of this field is to pop up the color picker below the text field and the chosen color will be reflected as a hexidecimal number in the value of the text field.
 
-The color picker used for this component can be found here: http://www.eyecon.ro/colorpicker (release: 23.05.2009)
+The color picker used for this component can be found here: https://github.com/bsara/pickacolor.js
 
 
 #### Usage
 
-Remember that this component is just an extended version of a normal text field. You can use all attributes that are available to a normal text field. The only exception is the `type` attribute, it is not allowed.
+Remember that this component is just an extended version of a normal text field. You can use all attributes that are available to a normal text field. __The only exception is the `type` attribute, it is not allowed.__
 
     {{input-colorpicker-text ...}}
 
 
 #### Additional Attributes (All are optional)
 
+- `allCaps` - When true, all capital letters are used for hex representations of colors.
+  - __Type:__ `boolean`
+  - __Default:__ `true`
+- `hideButtons` - When true, the cancel and submit buttons will not be available on the color picker.
+  - __Type:__ `boolean`
+  - __Default:__ `true`
 - `defaultColor` - The default color. String for hex color or hash for RGB and HSB ({r:255, r:0, b:0}).
   - __Type:__ `string`
   - __Default:__ `"FF0000"`
-- `isPickerFlat`: Whether the color picker is appended to the element or triggered by an event.
+- `livePreview` - Whether the color values are filled in the fields while changing values on selector or a field. If false it may improve speed.
   - __Type:__ `boolean`
-  - __Default:__ `false`
+  - __Default:__ `true`
+- `onBeforeCancelAction` - Ember action to perform during `onBeforeCancel`.
+  - __Type:__ `ember action name`
 - `onBeforeShowPickerAction` - Ember action to perform during `onBeforeShowPicker`.
   - __Type:__ `ember action name`
 - `onChangePickerAction` - Ember action to perform during `onChangePicker`.
@@ -116,42 +124,44 @@ Remember that this component is just an extended version of a normal text field.
 - `pickerPosition` - Determines where the color picker will appear relative to the text field. If a value is given that is not listed below, then the default will be used.
   - __Type:__ `enum`
   - __Options:__
-    - `"top"` - The picker's bottom left corner will touch the text field's top left corner.
-    - `"top-left"` - The picker's bottom right corner will touch the text field's top right corner.
-    - `"bottom"` __default__ - The picker's top left corner will touch the text field's bottom left corner.
-    - `"bottom-left"` - The picker's top right corner will touch the text field's bottom right corner.
+    - `"top-left"` - The picker's bottom left corner will touch the text field's top left corner.
+    - `"top-right"` - The picker's bottom right corner will touch the text field's top right corner.
+    - `"bottom-left"` __default__ - The picker's top left corner will touch the text field's bottom left corner.
+    - `"bottom-right"` - The picker's top right corner will touch the text field's bottom right corner.
     - `"left"` - The picker's right side will touch the text field's left side and be centered with the text field.
-    - `"left-high"` - The picker's bottom right corner will touch the text field's bottom left corner.
-    - `"left-low"` - The picker's top right corner will touch the text field's top left corner.
+    - `"left-top"` - The picker's bottom right corner will touch the text field's bottom left corner.
+    - `"left-bottom"` - The picker's top right corner will touch the text field's top left corner.
     - `"right"` - The picker's left side will touch the text field's right side and be centered with the text field.
-    - `"right-high"` - The picker's bottom left corner will touch the text field's bottom right corner.
-    - `"right-low"` - The picker's top left corner will touch the text field's top right corner.
-- `pickerStyleSelector` - Used to find all elements that should have their CSS updated when the color is updated.
-  - __Type:__ `jQuery Selector`
-  - __Default:__ `null`
-- `pickerStyleAttribute` - The CSS attribute to update for the object(s) specified by `pickerStyleSelector`. (__NOTE:__ Specifying multiple attributes is NOT currently supported.)
+    - `"right-top"` - The picker's bottom left corner will touch the text field's bottom right corner.
+    - `"right-bottom"` - The picker's top left corner will touch the text field's top right corner.
+- `popup`: Whether the color picker is appended to the element or triggered by an event.
+  - __Type:__ `boolean`
+  - __Default:__ `false`
+- `popupEvent`: The desired event to trigger the color picker (only used if `popup` is `true`).
   - __Type:__ `string`
-  - __Default:__ `"color"`
-- `pickerValueSelector` - Used to find all elements that should have their values updated when the color is updated.
-  - __Type:__ `jQuery Selector`
-  - __Default:__ `this`
-- `setColorEvent` - The event on which the color should be set as the current color and the elements specified by `pickerValueSelector` and `pickerStyleSelector' should be updated accordingly. If a value is given that is not listed below, then the default will be used.
+  - __Default:__ `"click"`
+- `setColorEvent` - The event on which the color should be set as the current color and the elements specified by `valueSelector` and `styleSelector` should be updated accordingly. If a value is given that is not listed below, then the default will be used.
   - __Type:__ `enum`
   - __Options:__
     - `"change"` __default__
     - `"hide"`
     - `"submit"`
-- `showPickerEvent` - The desired event to trigger the colorpicker.
+- `styleAttribute` - The CSS attribute to update for the object(s) specified by `styleSelector`. (__NOTE:__ Specifying multiple attributes is NOT currently supported.)
   - __Type:__ `string`
-  - __Default:__ `"click"`
-- `useAllCaps` - When true, all capital letters are used for hex representations of colors.
-  - __Type:__ `boolean`
-  - __Default:__ `true`
+  - __Default:__ `"color"`
+- `styleSelector` - Used to find all elements that should have their CSS updated when the color is updated.
+  - __Type:__ `jQuery Selector`
+  - __Default:__ `null`
+- `valueSelector` - Used to find all elements that should have their values updated when the color is updated.
+  - __Type:__ `jQuery Selector`
+  - __Default:__ `this`
 
 
 #### Additional Events (All are optional)
 
+- `onBeforeCancelPicker` - Callback function triggered before the color picker is cancelled. If not explicitly set, a default function will be used.
 - `onBeforeShowPicker` - Callback function triggered before the color picker is shown. If not explicitly set, a default function will be used.
+- `onCancelPicker` - Callback function triggered when the color picker cancel is clicked. If not explicity set, a default function will be used.
 - `onChangePicker` - Callback function triggered when the color is changed. If not explicitly set, a default function will be used.
 - `onHidePicker` - Callback function triggered when the color picker is hidden. If not explicitly set, a default function will be used.
 - `onShowPicker` - Callback function triggered when the color picker is shown. If not explicitly set, a default function will be used.
@@ -282,7 +292,7 @@ Next make sure you include the `App.PopoverEventsMixin` in your `ApplicationRout
 Finally, use the `popover-anchor` template helper to render a link in your template that will trigger the opening of a popover:
 
   {{#popover-anchor
-    name='companyPickerPopover'   // The name of the controller that will manage this popover. In this case `App.CompanyPickerPopoverController` 
+    name='companyPickerPopover'   // The name of the controller that will manage this popover. In this case `App.CompanyPickerPopoverController`
     model=companies         // The object that should be passed to the controller as it's model.
     classNames="badge"        // Any standard ember view helper attributes you want to add.
     arrow="left"          // Which side of the popover the arrow pointing up should be on. Possible values: `left` or `right`.

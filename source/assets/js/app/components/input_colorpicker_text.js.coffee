@@ -3,10 +3,10 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
   attributes: [
     'allCaps'        # (boolean) When `true`, all capital letters are used for hex representations of colors. Default: `true`
     'defaultColor'   # (string) The default color. String for hex color or hash for RGB and HSB ({r:255, r:0, b:0}). Default: `"FF0000"`
-    'hideButtons'    # (boolean) When `true`, the cancel and submit buttons will not be available on the color picker. Default: `false`
+    'hideButtons'    # (boolean) When `true`, the cancel and submit buttons will not be available on the color picker. Default: `true`
     'livePreview'    # (boolean) Whether the color values are filled in the fields while changing values on selector or a field. If false it may improve speed. Default: `true`
 
-    'onBeforeCancel'           # (ember.js action) Ember action to perform during `onBeforeCancel`. Default: null
+    'onBeforeCancelAction'     # (ember.js action) Ember action to perform during `onBeforeCancel`. Default: null
     'onBeforeShowPickerAction' # (ember.js action) Ember action to perform during `onBeforeShowPicker`. Default: null
     'onChangePickerAction'     # (ember.js action) Ember action to perform during `onChangePicker`. Default: null
     'onHidePickerAction'       # (ember.js action) Ember action to perform during `onHidePicker`. Default: null
@@ -34,17 +34,17 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
                      #        Default:
                      #           `bottom-left`
     'popup'          # (boolean) Whether the color picker is appended to the element or triggered by an event. Default: `false`
-    'popupEvent'     # (string) The desired event to trigger the color picker (only used if `popup` is `false`. Default: `click`
+    'popupEvent'     # (string) The desired event to trigger the color picker (only used if `popup` is `true`). Default: "click"
 
 
     'setColorEvent'  # (enum) The event on which the color should be set as the current color and the elements specified by `valueSelector` and
                      #        `styleSelector` should be updated accordingly. If a value is given that is not listed below, then the default will be used.
                      #
                      #        Options:
-                     #          `change`, `submit`, `hide`
+                     #          "change", "submit", "hide"
                      #
                      #        Default:
-                     #          `change`
+                     #          "change"
     'styleAttribute' # (string) The CSS attribute to update for the object(s) specified by `styleSelector`. Default: `color`
                      #          TODO: Add ability to specify multiple attributes
     'styleSelector'  # (jQuery Selector) Used to find all elements that should have their CSS updated when the color is updated. Default: `null`
@@ -52,13 +52,13 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
   ]
 
   events: [
-    'onBeforeCancel'     # (function) Callback function triggered before the color picker is cancelled. If not explicitly set, a default function will be used.
-    'onBeforeShowPicker' # (function) Callback function triggered before the color picker is shown. If not explicitly set, a default function will be used.
-    'onCancel'           # (function) Callback function triggered when the color picker cancel is clicked. If not explicity set, a default function will be used.
-    'onChangePicker'     # (function) Callback function triggered when the color is changed. If not explicitly set, a default function will be used.
-    'onHidePicker'       # (function) Callback function triggered when the color picker is hidden. If not explicitly set, a default function will be used.
-    'onShowPicker'       # (function) Callback function triggered when the color picker is shown. If not explicitly set, a default function will be used.
-    'onSubmitPicker'     # (function) Callback function triggered when the color it is chosen. If not explicitly set, a default function will be used.
+    'onBeforeCancelPicker' # (function) Callback function triggered before the color picker is cancelled. If not explicitly set, a default function will be used.
+    'onBeforeShowPicker'   # (function) Callback function triggered before the color picker is shown. If not explicitly set, a default function will be used.
+    'onCancelPicker'       # (function) Callback function triggered when the color picker cancel is clicked. If not explicity set, a default function will be used.
+    'onChangePicker'       # (function) Callback function triggered when the color is changed. If not explicitly set, a default function will be used.
+    'onHidePicker'         # (function) Callback function triggered when the color picker is hidden. If not explicitly set, a default function will be used.
+    'onShowPicker'         # (function) Callback function triggered when the color picker is shown. If not explicitly set, a default function will be used.
+    'onSubmitPicker'       # (function) Callback function triggered when the color it is chosen. If not explicitly set, a default function will be used.
   ]
 
 
@@ -81,7 +81,7 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
     @valueSelector  = this     if !@valueSelector?
 
 
-    if !@onBeforeCancel?
+    if !@onBeforeCancelPicker?
       options.onBeforeCancel = ->
         if emberObject.onBeforeCancelAction?
           return emberObject.sendAction 'onBeforeCancelAction'
@@ -103,7 +103,7 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
       options.onBeforeShow = @onBeforeShowPicker
 
 
-    if !@onCancel?
+    if !@onCancelPicker?
       options.onCancel = ->
         emberObject.sendAction 'onCancelAction' if emberObject.onCancelAction?
     else
