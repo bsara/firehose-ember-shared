@@ -1,8 +1,9 @@
 App.InputColorpickerTextComponent = Ember.TextField.extend
 
   attributes: [
-    'allCaps'        # (boolean) When `true,` all capital letters are used for hex representations of colors. Default: `true`
+    'allCaps'        # (boolean) When `true`, all capital letters are used for hex representations of colors. Default: `true`
     'defaultColor'   # (string) The default color. String for hex color or hash for RGB and HSB ({r:255, r:0, b:0}). Default: `"FF0000"`
+    'hideButtons'    # (boolean) When `true`, the cancel and submit buttons will not be available on the color picker. Default: `false`
     'livePreview'    # (boolean) Whether the color values are filled in the fields while changing values on selector or a field. If false it may improve speed. Default: `true`
 
     'onBeforeCancel'           # (ember.js action) Ember action to perform during `onBeforeCancel`. Default: null
@@ -67,6 +68,7 @@ App.InputColorpickerTextComponent = Ember.TextField.extend
 
     options.allCaps        = @allCaps        if @allCaps != undefined && typeof @allCaps == 'boolean'
     options.defaultColor   = @defaultColor   if @defaultColor != undefined
+    options.hideButtons    = @hideButtons    if @hideButtons != undefined && typeof @hideButtons == 'boolean'
     options.livePreview    = @livePreview    if @livePreview != undefined && typeof @livePreview == 'boolean'
     options.pickerPosition = @pickerPosition if @pickerPosition != undefined
     options.popup          = @popup          if @popup != undefined && typeof @popup == 'boolean'
