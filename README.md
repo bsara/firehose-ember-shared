@@ -345,11 +345,7 @@ This list is ordered alphabetically.
 
 -----------------------------------------
 
-### ~~Focus Text Field and Text View~~ [Depricated]
-
-__\*\*Use [Extended Text Field](#extended-text-field) and [Extended Text Area](#extended-text-area) instead\*\*__
-
-The `focus-textfield` and `focus-textarea` are just extended text inputs that are given focus as soon as they are added to the DOM. Use them exactly as you would the ember `textfield` and `textarea` helpers provided by Ember.js.
+## **NO DEPRICATED COMPONENTS AT THIS TIME**
 
 -----------------------------------------
 
