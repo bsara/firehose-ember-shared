@@ -2,6 +2,35 @@ if typeof String.EMPTY == 'undefined' || !String.EMPTY?
   String.EMPTY = ""
 
 
+if typeof String::trimNonSpace == 'undefined'
+  String::trimNonSpace = (stringToTrim) ->
+    escapedStringToTrim = stringToTrim.escapeRegex()
+    return @replace RegExp("(^#{escapedStringToTrim}+|#{escapedStringToTrim}+$)", 'gm'), String.EMPTY
+
+
+if typeof String::contains == 'undefined'
+  String::contains = (searchString) ->
+    return (@indexOf(searchString) > -1)
+
+
+if typeof String::indicesOf == 'undefined'
+  String::indicesOf = (searchString) ->
+    indices     = []
+    startIndex  = 0
+    resultIndex = -1
+
+    while true
+      resultIndex = @indexOf(searchString, startIndex)
+
+      if resultIndex < 0
+        break
+
+      indices.push(resultIndex)
+      startIndex = resultIndex + searchString.length
+
+    return indices
+
+
 if typeof String::truncate != 'function'
   String::truncate = (max_chars) ->
     str = this
@@ -115,8 +144,8 @@ if typeof String::unescapeRegex != 'function'
             .replace /\\\\/g, "\\"
 
 
-if typeof String::occurrences != 'function'
-  String::occurrences = (searchString, caseSensitive) ->
+if typeof String::occurrenceCount != 'function'
+  String::occurrenceCount = (searchString, caseSensitive) ->
     if !caseSensitive? || typeof caseSensitive != 'boolean'
       caseSensitive = false
     return @match(RegExp(searchString.escapeRegex(), "gm#{if caseSensitive then String.EMPTY else "i"}")).length
