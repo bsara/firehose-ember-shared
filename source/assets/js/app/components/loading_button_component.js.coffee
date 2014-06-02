@@ -15,7 +15,7 @@ App.LoadingButtonComponent = Ember.Component.extend
     if !@isLoading
       @set "isLoading", true
       @sendAction "action", =>
-        @set "isLoading", false if !@isDestroyed
+        @set "isLoading", false if !(@isDestroying || @isDestroyed)
 
 
   disabledChanged: (->
