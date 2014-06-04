@@ -7,11 +7,11 @@ Shared components among Firehose client ember apps
 
 ## API Reference
 
-- [Ember Components](wiki#ember-components)
-- [Ember Mixins](wiki#ember-mixins)
-- [Handlebars Helpers](wiki#handlebars-helpers)
-- [Misc](wiki#misc)
-- [Vendor Libraries](wiki#vendor-libraries)
+- [Ember Components](https://github.com/mysterioustrousers/firehose-ember-shared/wiki#ember-components)
+- [Ember Mixins](https://github.com/mysterioustrousers/firehose-ember-shared/wiki#ember-mixins)
+- [Handlebars Helpers](https://github.com/mysterioustrousers/firehose-ember-shared/wiki#handlebars-helpers)
+- [Misc](https://github.com/mysterioustrousers/firehose-ember-shared/wiki#misc)
+- [Vendor Libraries](https://github.com/mysterioustrousers/firehose-ember-shared/wiki#vendor-libraries)
 
 
 
