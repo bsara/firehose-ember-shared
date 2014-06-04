@@ -1,16 +1,18 @@
 {
   "dependencies": {
-    "ember"              : "1.4.0",
-    "ember-view-animate" : "~1.0.0",
-    "firehosejs"         : "mysterioustrousers/FirehoseJS",
-    "handlebars"         : "~1.2.1",
-    "js-md5"             : "~1.1.0",
-    "js-url"             : "~1.8.6",
-    "jquery"             : "~2.0",
-    "marked"             : "~0.3.2",
-    "moment"             : "~2.5.0",
-    "normalize-scss"     : "~2.1.3",
-    "pickacolor.js"      : "bsara/pickacolor.js",
-    "underscore"         : "~1.5.2"
+    "ember"                     : "1.4.0",
+    "ember-view-animate"        : "~1.0.0",
+    "firehosejs"                : "mysterioustrousers/FirehoseJS",
+    "handlebars"                : "~1.2.1",
+    "js-md5"                    : "~1.1.0",
+    "js-url"                    : "~1.8.6",
+    "jquery"                    : "~2.0",
+    "marked"                    : "~0.3.2",
+    "moment"                    : "~2.5.0",
+    "mousetrap"                 : "1.4.6",
+    "mousetrap-global-bind.min" : "http://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap-global-bind.min.js",
+    "normalize-scss"            : "~2.1.3",
+    "pickacolor.js"             : "bsara/pickacolor.js",
+    "underscore"                : "~1.5.2"
   }
 }
