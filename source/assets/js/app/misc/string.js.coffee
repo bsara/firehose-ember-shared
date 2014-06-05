@@ -112,36 +112,36 @@ if typeof String::endsWith != 'function'
 
 if typeof String::escapeRegex != 'function'
   String::escapeRegex = () ->
-    return @replace /\\/g, "\\\\"
-            .replace /\//g, "\\/"
-            .replace /\./g, "\\."
-            .replace /\*/g, "\\*"
-            .replace /\+/g, "\\+"
-            .replace /\?/g, "\\?"
-            .replace /\|/g, "\\|"
-            .replace /\(/g, "\\("
-            .replace /\)/g, "\\)"
-            .replace /\[/g, "\\["
-            .replace /\]/g, "\\]"
-            .replace /\{/g, "\\{"
-            .replace /\}/g, "\\}"
+    return @replace(/\\/gm, "\\\\")
+            .replace(/\//gm, "\\/")
+            .replace(/\./gm, "\\.")
+            .replace(/\*/gm, "\\*")
+            .replace(/\+/gm, "\\+")
+            .replace(/\?/gm, "\\?")
+            .replace(/\|/gm, "\\|")
+            .replace(/\(/gm, "\\(")
+            .replace(/\)/gm, "\\)")
+            .replace(/\[/gm, "\\[")
+            .replace(/\]/gm, "\\]")
+            .replace(/\{/gm, "\\{")
+            .replace(/\}/gm, "\\}")
 
 
 if typeof String::unescapeRegex != 'function'
   String::unescapeRegex = () ->
-    return @replace /\\\}/g, "}"
-            .replace /\\\{/g, "{"
-            .replace /\\\]/g, "]"
-            .replace /\\\[/g, "["
-            .replace /\\\)/g, ")"
-            .replace /\\\(/g, "("
-            .replace /\\\|/g, "|"
-            .replace /\\\?/g, "?"
-            .replace /\\\+/g, "+"
-            .replace /\\\*/g, "*"
-            .replace /\\\./g, "."
-            .replace /\\\//g, "/"
-            .replace /\\\\/g, "\\"
+    return @replace(/\\\}/gm, "}")
+            .replace(/\\\{/gm, "{")
+            .replace(/\\\]/gm, "]")
+            .replace(/\\\[/gm, "[")
+            .replace(/\\\)/gm, ")")
+            .replace(/\\\(/gm, "(")
+            .replace(/\\\|/gm, "|")
+            .replace(/\\\?/gm, "?")
+            .replace(/\\\+/gm, "+")
+            .replace(/\\\*/gm, "*")
+            .replace(/\\\./gm, ".")
+            .replace(/\\\//gm, "/")
+            .replace(/\\\\/gm, "\\")
 
 
 if typeof String::occurrenceCount != 'function'

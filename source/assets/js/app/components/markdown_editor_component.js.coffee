@@ -1,4 +1,4 @@
-App.MarkdownEditorComponent = Ember.TextArea.extend
+App.MarkdownEditorComponent = Ember.TextArea.extend App.InputTextMixin, App.KeyBindingsMixin, App.StandardEventsMixin, {
 
   strategies: 'cannedResponse'
 
@@ -113,5 +113,5 @@ App.MarkdownEditorComponent = Ember.TextArea.extend
     this._setupAttachments()
     this._notifyController()
   ).on 'didInsertElement'
-
+}
 
