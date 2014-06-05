@@ -10,7 +10,6 @@
     "marked"                    : "~0.3.2",
     "moment"                    : "~2.5.0",
     "mousetrap"                 : "1.4.6",
-    "mousetrap-global-bind.min" : "http://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap-global-bind.min.js",
     "normalize-scss"            : "~2.1.3",
     "pickacolor.js"             : "bsara/pickacolor.js",
     "underscore"                : "~1.5.2"
