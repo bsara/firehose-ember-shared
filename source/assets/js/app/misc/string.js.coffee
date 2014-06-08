@@ -2,6 +2,10 @@ if typeof String.EMPTY == 'undefined' || !String.EMPTY?
   String.EMPTY = ""
 
 
+if typeof String.SPACE == 'undefined' || !String.SPACE?
+  String.SPACE = " "
+
+
 if typeof String::trimNonSpace == 'undefined'
   String::trimNonSpace = (stringToTrim) ->
     escapedStringToTrim = stringToTrim.escapeRegex()
