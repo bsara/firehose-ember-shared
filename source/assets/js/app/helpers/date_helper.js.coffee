@@ -29,5 +29,4 @@ Ember.Handlebars.registerBoundHelper 'simpleSinceString', (date) ->
 
   secondDifference = nowMoment.diff dateMoment, 'seconds'
   if secondDifference > 0
-    return "< 1m"
-    #return "#{secondDifference}s"
+    return "#{secondDifference}s"
