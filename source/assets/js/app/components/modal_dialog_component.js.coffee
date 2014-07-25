@@ -1,11 +1,14 @@
 App.ModalDialogComponent = Ember.Component.extend
 
+  modal         : null
 
-  size    : { width: "600", height: "600" }
+  content       : null
 
-  modal   : null
+  gravity       : 'center'
 
-  content : null
+  gravityPoints : { top: 0 }
+
+  size          : { width: "600", height: "600" }
 
 
   actions:
@@ -14,12 +17,20 @@ App.ModalDialogComponent = Ember.Component.extend
 
 
   didInsertElement: ->
-    options      = this.get 'options'
-    @modal       = this.$ '.js-modal'
-    @content     = this.$ '.js-content'
-    @size.width  = if options.size then options.size.width else @size.width
-    @size.height = if options.size then options.size.height else @size.height
+    options       = this.get 'options'
+    @modal        = this.$ '.js-modal'
+    @content      = this.$ '.js-content'
+    @gravity      = options.gravity if options.gravity?
+
+    if options.gravityPoints?
+      @gravityPoints.top = options.gravityPoints.top if options.gravityPoints.top
+
+    if options.size?
+      @size.width  = options.size.width  if options.size.width?
+      @size.height = options.size.height if options.size.height?
+
     @_layout()
+
     $(window).on 'resize', $.proxy(@_layout, this)
     @modal.find('input').first().focus()
     Ember.run.schedule 'afterRender', =>
@@ -48,7 +59,10 @@ App.ModalDialogComponent = Ember.Component.extend
     else
       @content.height(height - margin * 2)
 
-    top  = ($( document ).height() / 2) - (height / 2)
+    if @gravity == 'top'
+      top = @gravityPoints.top
+    else
+      top  = ($( document ).height() / 2) - (height / 2)
     left = ($( document ).width() / 2) - (width / 2)
 
     @modal.css

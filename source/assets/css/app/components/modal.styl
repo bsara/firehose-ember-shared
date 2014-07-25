@@ -9,6 +9,9 @@
     color: #444;
     text-decoration: underline;
 
+    &.button
+      text-decoration: none
+
   code, pre
     font-family: Consolas, Courier, monospace;
     font-size: 12px;
@@ -73,14 +76,16 @@
     font-family: "Source Sans Pro", sans-serif;
     margin: 5px 0 8px 0;
 
+  button,
+  input[type="button"],
   .button
     background: #000;
     font-family: "Source Sans Pro", sans-serif;
     color: #fff;
     border-radius: 3px;
 
-  .button:hover
-    background: #c00;
+    &:hover
+      background: #c00;
 
 .modal-overlay
   background-color: black;
