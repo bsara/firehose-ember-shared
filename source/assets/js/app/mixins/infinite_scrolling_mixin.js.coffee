@@ -17,15 +17,15 @@ App.InifiniteScrollingMixin = Ember.Mixin.create
 
 
   _didScroll: ->
-    if this._isScrolledToBottom()
-      this.didScrollToBottom()
-    if this._isScrolledToTop()
-      this.didScrollToTop()
+    if @_isScrolledToBottom()
+      @didScrollToBottom()
+    if @_isScrolledToTop()
+      @didScrollToTop()
 
 
   _isScrolledToBottom: ->
     return unless @isListeningForScrolling
-    scr = this.$( @scrollableAreaSelector )
+    scr = $(@scrollableAreaSelector)
     outerHeight   = scr.outerHeight()
     scrollHeight  = scr.get(0).scrollHeight
     scrollTop     = scr.scrollTop()
@@ -36,7 +36,7 @@ App.InifiniteScrollingMixin = Ember.Mixin.create
 
 
   _isScrolledToTop: ->
-    scr = this.$( @scrollableAreaSelector )
+    scr = $(@scrollableAreaSelector)
     scrollTop = scr.scrollTop()
     if scrollTop < 50 and @_hasScrolledDown and @isListeningForScrolling
       @isListeningForScrolling = false
@@ -50,13 +50,11 @@ App.InifiniteScrollingMixin = Ember.Mixin.create
   # hooks
 
   setupInfiniteScrolling: ->
-    # we want to make sure 'this' inside `_didScroll` refers
-    # to the IndexView, so we use jquery's `proxy` method to bind it
-    @_scrollFunction = $.proxy( this._didScroll, this )
-    this.$( @scrollableAreaSelector ).on 'scroll', @_scrollFunction
+    @_scrollFunction = () => @_didScroll()
+    $(@scrollableAreaSelector).on 'scroll', @_scrollFunction
 
 
   destroyInfiniteScrolling: ->
     if @_scrollFunction?
-      this.$( @scrollableAreaSelector ).off 'scroll', @_scrollFunction
+      $(@scrollableAreaSelector).off 'scroll', @_scrollFunction
       @_scrollFunction = null
